@@ -69,10 +69,13 @@
                                     <action selector="getDate:" destination="BYZ-38-t0r" eventType="valueChanged" id="AeS-Nb-n4C"/>
                                 </connections>
                             </datePicker>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="Auto Play" translatesAutoresizingMaskIntoConstraints="NO" id="Z7D-vH-Db7">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="Auto Play" translatesAutoresizingMaskIntoConstraints="NO" id="Z7D-vH-Db7">
                                 <rect key="frame" x="334" y="523" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" systemColor="tintColor"/>
+                                <connections>
+                                    <action selector="turnOnSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="OPE-Vj-WcV"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2014" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zh-tB-PNJ">
                                 <rect key="frame" x="20" y="771" width="42" height="20"/>
@@ -98,6 +101,7 @@
                     </view>
                     <connections>
                         <outlet property="YearLabel" destination="Z00-7w-sG0" id="2ao-5M-d3P"/>
+                        <outlet property="autoPlaySwitch" destination="Z7D-vH-Db7" id="FQT-W5-L6o"/>
                         <outlet property="dateLabel" destination="vuc-QB-Lou" id="tf7-pO-Aap"/>
                         <outlet property="datePicker" destination="1Yc-XZ-TTO" id="qu5-nl-aIi"/>
                         <outlet property="mainImage" destination="I9g-Gv-tm6" id="WJc-F8-2Zn"/>
