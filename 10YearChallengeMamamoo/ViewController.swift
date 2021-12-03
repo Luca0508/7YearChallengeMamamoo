@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -22,9 +23,20 @@ class ViewController: UIViewController {
     var autoMonth = 6
     var autoYear = 2014
     let initialDate = DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, year: 2014, month: 6, day: 19).date
+    let player = AVPlayer()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let fileUrl = Bundle.main.url(forResource: "happierThanEver", withExtension: "mp4")!
+        
+        player.replaceCurrentItem(with: AVPlayerItem(url: fileUrl))
+        player.play()
+        
+        player.volume = 0.8
+        
         
         if let initialDate = initialDate {
             datePicker.setDate(initialDate, animated: true)
@@ -91,12 +103,10 @@ class ViewController: UIViewController {
     
     @IBAction func turnOnSwitch(_ sender: UISwitch) {
         if sender.isOn{
-//            if let initialDate = initialDate {
-//                datePicker.setDate(initialDate, animated: true)
-//            }
+
             autoYear = 2014
             autoMonth = 5
-            timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: {(timer) in self.autoChangeDate()})
+            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: {(timer) in self.autoChangeDate()})
             
             
         }else{
