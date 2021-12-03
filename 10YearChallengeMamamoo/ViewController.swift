@@ -21,21 +21,17 @@ class ViewController: UIViewController {
     var timer: Timer?
     var autoMonth = 6
     var autoYear = 2014
-    
+    let initialDate = DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, year: 2014, month: 6, day: 19).date
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // set a default date for date picker
-        formatter.dateFormat = "yyyy-MM-dd"
-        let startDateString = "2014-06-19"
-        let startDate = formatter.date(from: startDateString)
-        
-        if let startDate = startDate {
-            datePicker.setDate(startDate, animated: true)
+        if let initialDate = initialDate {
+            datePicker.setDate(initialDate, animated: true)
         }
-//        let startDate = DateComponents(calendar: Calendar.current,year: 2014, month: 6, day: 19).date
         
+        
+
         
     }
     
@@ -52,33 +48,11 @@ class ViewController: UIViewController {
         let month = dateComponentPicker.month
         let day = dateComponentPicker.day
         
-        let date
-        
-        
-//        var imageName = String()
-//        var synDateString = String()
-//        if month!<10{
-//            imageName = "\(outputYear)0\(month!)01"
-//            synDateString = "\(outputYear)-0\(month!)-\(day!)"
-//        }else{
-//            imageName = "\(outputYear)\(month!)01"
-//            synDateString = "\(outputYear)-\(month!)-\(day!)"
-//        }
-//
-//        if imageName.contains("201406"){
-//            imageName = "20140619"
-//        }
-//
-//        mainImage.image = UIImage(named: imageName)
-//
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        let synDate = formatter.date(from: synDateString)
-//
-//        if let synDate = synDate {
-//            datePicker.setDate(synDate, animated: true)
-//        }
-//        dateLabel.text = synDateString
-        
+        let date = DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, year: Int(sender.value), month: month, day: day).date
+        if let date = date{
+            getImageAndLabel(datePickerDate: date)
+            datePicker.setDate(date, animated: true)
+        }
         
     }
     
@@ -117,16 +91,24 @@ class ViewController: UIViewController {
     
     @IBAction func turnOnSwitch(_ sender: UISwitch) {
         if sender.isOn{
-            timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: {(timer) in self.autoChangeDate()})
+//            if let initialDate = initialDate {
+//                datePicker.setDate(initialDate, animated: true)
+//            }
+            autoYear = 2014
+            autoMonth = 5
+            timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: {(timer) in self.autoChangeDate()})
+            
+            
         }else{
             turnOffTimer()
+            
         }
     }
     
     func turnOffTimer(){
         timer?.invalidate()
-        autoMonth = 6
-        autoYear = 2014
+        autoMonth = 12
+        autoYear = 2021
     }
     
     
@@ -142,30 +124,14 @@ class ViewController: UIViewController {
             self.autoMonth = 1
         }
         
-        var imageName = String()
-        var synDateString = String()
-        if autoMonth < 10{
-            imageName = "\(autoYear)0\(autoMonth)01"
-            synDateString = "\(autoYear)-0\(autoMonth)-01"
-        }else{
-            imageName = "\(autoYear)\(autoMonth)01"
-            synDateString = "\(autoYear)-\(autoMonth)-01"
+        let autoDate = DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, year: autoYear, month: autoMonth, day: 1).date
+        
+        if let autoDate = autoDate{
+            getImageAndLabel(datePickerDate: autoDate)
+            datePicker.setDate(autoDate, animated: true)
+            yearSlider.setValue(Float(autoYear), animated: true)
+                
         }
-        
-        if imageName.contains("201406"){
-            imageName = "20140619"
-        }
-        
-        mainImage.image = UIImage(named: imageName)
-        
-        formatter.dateFormat = "yyyy-MM-dd"
-        let synDate = formatter.date(from: synDateString)
-        
-        if let synDate = synDate {
-            datePicker.setDate(synDate, animated: true)
-        }
-        dateLabel.text = synDateString
-        
     }
 
 }
