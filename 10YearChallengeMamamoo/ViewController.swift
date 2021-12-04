@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     var autoMonth = 6
     var autoYear = 2014
     let initialDate = DateComponents(calendar: Calendar.current, timeZone: TimeZone.current, year: 2014, month: 6, day: 19).date
+    
     let player = AVPlayer()
     
     
@@ -41,9 +42,6 @@ class ViewController: UIViewController {
         if let initialDate = initialDate {
             datePicker.setDate(initialDate, animated: true)
         }
-        
-        
-
         
     }
     
